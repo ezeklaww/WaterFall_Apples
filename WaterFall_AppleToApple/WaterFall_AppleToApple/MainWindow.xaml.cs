@@ -22,21 +22,14 @@ namespace WaterFall_AppleToApple
             InitializeComponent();
         }
 
-        private void Player_Name(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         private void OnClick(object sender, RoutedEventArgs e)
         {
-            string tempPlayerName = tbPlayerName.Text;
-            Console.WriteLine(tempPlayerName);
+            string tempPlayerCount = tbInput.Text;
+            
+            tbPlayerName.Clear();
+            MessageBox.Show($"there are {tempPlayerCount} players");
             
         }
 
-        private void playerName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
     }
 }
