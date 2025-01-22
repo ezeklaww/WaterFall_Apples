@@ -16,9 +16,27 @@ namespace WaterFall_AppleToApple
     /// </summary>
     public partial class MainWindow : Window
     {
+        //Button btnSubmit = new Button();
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Player_Name(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void OnClick(object sender, RoutedEventArgs e)
+        {
+            string tempPlayerName = tbPlayerName.Text;
+            Console.WriteLine(tempPlayerName);
+            
+        }
+
+        private void playerName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
