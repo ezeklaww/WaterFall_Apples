@@ -14,10 +14,9 @@ namespace WaterFall_AppleToApple
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class StartupWindow : Window
     {
-        //Button btnSubmit = new Button();
-        public MainWindow()
+        public StartupWindow()
         {
             InitializeComponent();
         }
@@ -26,7 +25,7 @@ namespace WaterFall_AppleToApple
         {
             string tempPlayerCount = tbInput.Text;
             
-            tbPlayerName.Clear();
+            tbInput.Clear();
             MessageBox.Show($"there are {tempPlayerCount} players");
             
         }
