@@ -8,5 +8,9 @@ namespace WaterFall_AppleToApple
 {
     class Card
     {
+        private int id;
+        private string title;
+        private string description;
+        private bool greenApple;
     }
 }

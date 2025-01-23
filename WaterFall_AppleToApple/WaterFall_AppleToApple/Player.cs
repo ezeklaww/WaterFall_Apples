@@ -8,5 +8,16 @@ namespace WaterFall_AppleToApple
 {
     class Player
     {
+        private int id;
+        private string name;
+        private int score;
+        //cardSelected
+        Card hand;
+
+        public void PlayCard(Card card)
+        {
+            
+        }
+
     }
 }

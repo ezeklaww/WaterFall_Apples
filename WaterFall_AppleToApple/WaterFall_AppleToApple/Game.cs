@@ -8,5 +8,20 @@ namespace WaterFall_AppleToApple
 {
     class Game
     {
+        private List<Player> players;
+        private List<Card> shownCards;
+        private Deck deck;
+        private int currentJudge;
+
+        public void NewGame()
+        {
+
+        }
+
+        public void ChangeTurn()
+        {
+
+        }
+        public void Update() { }
     }
 }

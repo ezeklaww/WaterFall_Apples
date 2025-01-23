@@ -8,5 +8,12 @@ namespace WaterFall_AppleToApple
 {
     class Deck
     {
+        List<Card> cards;
+
+
+        public void Shuffle()
+        {
+
+        }
     }
 }
