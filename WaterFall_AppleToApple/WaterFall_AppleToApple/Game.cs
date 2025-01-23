@@ -11,6 +11,7 @@ namespace WaterFall_AppleToApple
         private List<Player> players;
         private List<Card> shownCards;
         private Deck deck;
+        // Refers to element in players containing the Judge
         private int currentJudge;
 
         public void NewGame()
@@ -22,6 +23,17 @@ namespace WaterFall_AppleToApple
         {
 
         }
+
+        public void HideWheel()
+        {
+
+        }
+
+        public void ShowWheel()
+        {
+
+        }
+
         public void Update() { }
     }
 }

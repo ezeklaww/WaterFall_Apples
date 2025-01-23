@@ -30,5 +30,29 @@ namespace WaterFall_AppleToApple
             
         }
 
+        public void onShowHand()
+        {
+            // Needs a way to hide player hands before implementation
+        }
+
+        public void onRotateClockwise()
+        {
+
+        }
+
+        public void onRotateCounterClockwise()
+        {
+
+        }
+
+        public void onOK()
+        {
+
+        }
+
+        //public void onSelectCard(Card card)
+        //{
+        //
+        //}
     }
 }
