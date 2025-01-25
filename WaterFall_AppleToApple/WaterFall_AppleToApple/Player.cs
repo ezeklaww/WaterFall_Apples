@@ -11,8 +11,12 @@ namespace WaterFall_AppleToApple
         private int id;
         private string name;
         private int score;
-        //cardSelected
-        Card hand;
+        // Stores the ID of the played card
+        // If a player has not played a card yet, cardSelected will be set to -1;
+        // This is where we store the Judge's chosen card, since the Judge does not use this value otherwise
+        public int cardSelected = -1;
+        
+        public List<Card> hand;
 
         public void PlayCard(Card card)
         {

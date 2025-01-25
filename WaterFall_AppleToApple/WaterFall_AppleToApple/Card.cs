@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WaterFall_AppleToApple
 {
-    class Card
+    public class Card
     {
-        private int id;
-        private string title;
-        private string description;
-        private bool greenApple;
+        public int id;
+        public string title;
+        public string description;
+        public bool greenApple;
     }
 }
