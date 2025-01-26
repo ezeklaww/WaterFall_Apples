@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace WaterFall_AppleToApple
 {
-    class Deck
+    public class Deck
     {
         List<Card> cards;
 
+        public Deck(List<Card> cards)
+        {
+            this.cards = cards;
+        }
 
         public void Shuffle()
         {

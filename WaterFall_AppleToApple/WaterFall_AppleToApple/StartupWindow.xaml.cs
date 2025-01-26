@@ -17,96 +17,113 @@ namespace WaterFall_AppleToApple
     /// </summary>
     public partial class StartupWindow : Window
     {
+		private Game game;
+        private bool gameReady = false;
+        private int playerCount = 0;
+        List<string> names = new List<string>();
         public StartupWindow()
         {
             InitializeComponent();
         }
 
-        private void OnClick(object sender, RoutedEventArgs e)
+        private void OnSubmit(object sender, RoutedEventArgs e)
         {
-            string tempPlayerCount = tbInput.Text;
-            
-            tbInput.Clear();
-            MessageBox.Show($"there are {tempPlayerCount} players");
-            
+            string inputText = tbInput.Text;
+            if (string.IsNullOrWhiteSpace(inputText))
+            {
+                MessageBox.Show("Cannot leave empty");
+                return;
+            }
+
+            if (!gameReady) 
+            {
+                GamePrep(inputText);
+            } else
+            { 
+                GameReady(inputText);
+            }
         }
 
+        private void GameReady(string inputText)
+        {
+            names.Add(inputText);
+
+            lblOutput.Content = $"Enter a name for player {names.Count + 1}";
+            tbInput.Clear();
+
+            if (names.Count >= playerCount)
+            {
+                Game game = new Game(playerCount, names); //player count, and player names
+                //switch windows
+                var gameWindow = new GameWindow();
+
+                //Zeke will take care of this when GameWindow stuff is pushed
+                //var gameWindow = new GameWindow(game);
+                //private Game game;
+                //public GameWindow(Game game)
+                //{
+                //    InitializeComponent();
+
+                //    this.game = game;
+                //}
+
+
+                gameWindow.Show();
+                this.Close();
+            }
+        }
+
+        private void GamePrep(string inputText)
+        {
+            int tempPlayerCount = 0;
+            if (int.TryParse(inputText, out tempPlayerCount))
+            {
+                if (tempPlayerCount < 3 || tempPlayerCount > 8)
+                {
+                    MessageBox.Show("Must be between 3 and 8");
+                }
+                else
+                {
+                    gameReady = true;
+                    playerCount = tempPlayerCount;
+                    lblOutput.Content = $"Enter a name for player {names.Count + 1}";
+                }
+            }
+            else
+            {
+                MessageBox.Show("Must enter a number");
+            }
+            
+            tbInput.Clear();
+        }
+
+        // goes into the GameWindow
+        // OnClick methods below, after clicking the specific button,
+        // it will take you to the game logic in the Game class
         public void onShowHand()
         {
-			// Needs a way to hide player hands before implementation
-
-			// if cards are face down, Set all cards in <playerID>'s hand to be face up 
-			// else set all cards in <playerID>'s hand to be face down
+			game.ShowHand();
 		}
 
 		public void onRotateClockwise()
         {
-			// Move to the next player in the list (1, 2, 3, 4...)
-			// It is my understanding that the Judge is also stored in the players list, so we are ensuring that the Judge is skipped in the code here
-
-			for (int i = 1; i < Game.players.Count(); i++)
-			{
-				// if next player in list is not the judge and has NOT played a card
-				if ((Game.currentPlayer + i) % Game.players.Count() != Game.currentJudge && Game.players[(Game.currentPlayer + i) % Game.players.Count()].cardSelected == -1)
-				{
-					// Every time we update Game.currentPlayer, run the result through a modulus of Game.players.Count()
-					// This ensures we never exceed the boundries of the list
-					Game.currentPlayer = (Game.currentPlayer + i) % Game.players.Count();
-					break;
-				}
-			}
-			// Rotate wheel clockwise by (360/(playerCount - 1)) degrees
+            game.RotateClockwise();
 		}
 
 		public void onRotateCounterClockwise()
         {
-			// Move to the previous player in the list (4, 3, 2, 1...)
-			// It is my understanding that the Judge is also stored in the players list, so we are ensuring that the Judge is skipped in the code here
-
-			for (int i = 1; i < Game.players.Count(); i++)
-			{
-				// if next player in list is not the judge and has NOT played a card
-				// Take the absolute value of the modulus here to ensure results are greater than or equal to 0
-				if (Math.Abs((Game.currentPlayer - i) % Game.players.Count()) != Game.currentJudge && Game.players[Math.Abs((Game.currentPlayer - i) % Game.players.Count())].cardSelected == -1)
-				{
-					// Every time we update Game.currentPlayer, run the result through a modulus of Game.players.Count()
-					// This ensures we never exceed the boundries of the list
-					Game.currentPlayer = (Game.currentPlayer + i) % Game.players.Count();
-					break;
-				}
-			}
-			// Rotate wheel counterclockwise by (360/(playerCount - 1)) degrees
+			game.RotateCounterClockwise();
 		}
 
 		public void onOK(Card card)
         {
-			// Hide and disable the following buttons: RotateClockwise, RotateCounterClockwise, OK
-
-			// Hide the color wheel
-
-			// set value selectedCard to be equal to the Judge's choosen card ---
-			Game.players[Game.currentJudge].cardSelected = card.id;
-
-			Game.ChangeTurn(Game.players[Game.currentJudge].cardSelected);
-
+			game.OK(card);
 		}
 
 		// Should we also pass in the player that is playing the card?
 		public void onSelectCard(Card card, Player player)
         {
-			// remove card from hand
-			for (int i = 0; i < Player.hand.Count(); i++)
-			{
-				if (card.id == Player.hand[i].id)
-				{
-					// We should consider having the player's hand store just the card's ID rather than card objects. Anything beyond the cardID is only utilized by the UI
-					Player.hand[i] = null;
-					break;
-				}
-			}
-			// store the card's cardID in the player class under selectedCard
-			player.cardSelected = card.id;
-			// Place card face down in front of the player
+			game.SelectCard(card, player);
 		}
 	}
 }
