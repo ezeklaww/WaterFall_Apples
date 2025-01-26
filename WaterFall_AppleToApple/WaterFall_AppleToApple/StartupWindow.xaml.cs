@@ -78,18 +78,34 @@ namespace WaterFall_AppleToApple
 			// Rotate wheel counterclockwise by (360/(playerCount - 1)) degrees
 		}
 
-		public void onOK()
+		public void onOK(Card card)
         {
 			// Hide and disable the following buttons: RotateClockwise, RotateCounterClockwise, OK
+
 			// Hide the color wheel
-			// set value selectedCard to be equal to the Judge's choosen card --- Game.players[currentjudge].cardSelected = cardID;
-			// Game.ChangeTurn(Game.players[Game.currentJudge].cardSelected);
+
+			// set value selectedCard to be equal to the Judge's choosen card ---
+			Game.players[Game.currentJudge].cardSelected = card.id;
+
+			Game.ChangeTurn(Game.players[Game.currentJudge].cardSelected);
+
 		}
 
-		public void onSelectCard(Card card)
+		// Should we also pass in the player that is playing the card?
+		public void onSelectCard(Card card, Player player)
         {
 			// remove card from hand
+			for (int i = 0; i < Player.hand.Count(); i++)
+			{
+				if (card.id == Player.hand[i].id)
+				{
+					// We should consider having the player's hand store just the card's ID rather than card objects. Anything beyond the cardID is only utilized by the UI
+					Player.hand[i] = null;
+					break;
+				}
+			}
 			// store the card's cardID in the player class under selectedCard
+			player.cardSelected = card.id;
 			// Place card face down in front of the player
 		}
 	}

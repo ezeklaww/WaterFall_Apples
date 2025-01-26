@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace WaterFall_AppleToApple
 {
-    class Player
+    public class Player
     {
         private int id;
         private string name;
-        private int score;
+        public int score;
         // Stores the ID of the played card
         // If a player has not played a card yet, cardSelected will be set to -1;
         // This is where we store the Judge's chosen card, since the Judge does not use this value otherwise

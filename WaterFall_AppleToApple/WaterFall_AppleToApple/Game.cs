@@ -26,16 +26,41 @@ namespace WaterFall_AppleToApple
 			// A Judge is randomly selected from the list of players
 		}
 
-		public void ChangeTurn(int selectedCardID)
+		public static void ChangeTurn(int selectedCardID)
         {
 			// Whoever's card was selected (selectedCard) gets a point (use either switch statement or for loop)
+			for (int i = 0; i < players.Count; i++)
+			{
+				if (players[i].cardSelected == selectedCardID)
+				{
+					players[i].score += 1;
+				}
+			}
 			// Remove played green and red cards from play
+			for (int i = 0; i < players.Count(); i++)
+			{
+				players[i].cardSelected = -1;
+			}
 			// Everyone except the Judge draws a card
+			for (int i = 0; i < players.Count(); i++)
+			{
+				if (i != currentJudge)
+				{
+					// Max card hand is 7 cards
+					for (int j = 0; j < 7; j++)
+					{
+						if (players[i].hand[j] == null)
+						{
+
+						}
+					}
+				}
+			}
 			// Each card drawn is removed from the deck as soon as they are produced (for loop)
 			// Select a new player to be the Judge
 			// Draw lines from center of color wheel
-				// Start with drawing a line straight up
-				// Determine additional divisions with the equation (360/(playerCount - 1))
+			// Start with drawing a line straight up
+			// Determine additional divisions with the equation (360/(playerCount - 1))
 			// Reveal the color wheel
 		}
 
