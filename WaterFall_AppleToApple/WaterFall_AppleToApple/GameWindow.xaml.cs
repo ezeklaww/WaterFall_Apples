@@ -124,7 +124,7 @@ namespace WaterFall_AppleToApple
             {
                 if (clickedBtn.Content.Equals("Show Hand"))
                 {
-                    clickedBtn.Content = "Show Hand";
+                    clickedBtn.Content = "Hide Hand";
                     
                     string btnName = clickedBtn.Name;
                     game.ShowHand(int.Parse(btnName.Substring(9)));
