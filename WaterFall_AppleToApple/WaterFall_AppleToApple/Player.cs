@@ -26,5 +26,10 @@
             
         }
 
+        public int GetHandSize()
+        {
+            return hand.Count;  
+        }
+
     }
 }

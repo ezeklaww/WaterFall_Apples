@@ -47,7 +47,7 @@ namespace WaterFall_AppleToApple
                 };
                 var playerBtn = new Button
                 {
-                    Name = $"player{i}Btn",
+                    Name = $"btnPlayer{i}",
                     Content = "Show Hand",
                     Margin = new Thickness(0, 0, 0, 10)
                 };
@@ -124,14 +124,48 @@ namespace WaterFall_AppleToApple
             {
                 if (clickedBtn.Content.Equals("Show Hand"))
                 {
-                    clickedBtn.Content = "Hide Hand";
-                    game.ShowHand();
+                    clickedBtn.Content = "Show Hand";
+                    
+                    string btnName = clickedBtn.Name;
+                    game.ShowHand(int.Parse(btnName.Substring(9)));
                 } else if (clickedBtn.Content.Equals("Hide Hand"))
                 {
                     clickedBtn.Content = "Show Hand";
+
+
+                    game.HideHand();
+                    StopDisplayingHand();
                 }
             
             }
+        }
+
+        public void DisplayHand(List<Card> hand)
+        {
+            for (int i = 0; i < hand.Count(); i++)
+            {
+                var cardTitle = new TextBlock
+                {
+                    Name = $"card{i}Title",
+                    Text = hand[i].Title,
+                    Margin = new Thickness(5, 0, 0, 5)
+                };
+                var cardDescription = new TextBlock
+                {
+                    Name = $"card{i}Desciption",
+                    Text = hand[i].Description,
+                    Margin = new Thickness(5, 0, 0, 5)
+                };
+
+                GridHand.Children.Add(cardTitle);
+                GridHand.Children.Add(cardDescription);
+            }
+
+        }
+
+        public void StopDisplayingHand()
+        {
+            GridHand.Children.Clear();
         }
 
         public void OnCardInHand(object sender, RoutedEventArgs e)

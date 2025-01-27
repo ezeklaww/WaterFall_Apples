@@ -13,6 +13,7 @@ namespace WaterFall_AppleToApple
         const int DECK_SIZE = 100;
         const int GREEN_DECK_SIZE = 50;
         const int SCORE_TO_WIN = 6;
+        const int MAX_HAND_SIZE = 7;
 
 
         public List<Player> players;
@@ -23,7 +24,7 @@ namespace WaterFall_AppleToApple
         // Refers to element in players containing the Judge
         public int currentJudge;
 		// Keeps track of location in the players list
-		public int currentPlayer = 0;
+		public int currentPlayer = -1;
 
         public Game(int playerCount, List<string> playerNames)
         {
@@ -40,16 +41,31 @@ namespace WaterFall_AppleToApple
 
         public void NewGame()
         {
-			// Any red and green cards removed from play are returned to their respective decks
-			// Set all player names to default and allow players to fill in their names. Each successful name adds to the player count and is stored in the list, up to a maximum of 10 players.
-			// Set everyone's point total to 0
-			// Each player draws 7 cards
+            MongoFillDecks();
+            DrawToSeven();
+            // Each player draws 7 cards
+            // Any red and green cards removed from play are returned to their respective decks
+            // Set all player names to default and allow players to fill in their names. Each successful name adds to the player count and is stored in the list, up to a maximum of 10 players.
+            // Set everyone's point total to 0
 			// Each card drawn is removed from the deck as soon as they are produced (for loop)
 			// A Judge is randomly selected from the list of players
 			// Shuffle the decks
 
-            MongoFillDecks();
 		}
+
+        /// <summary>
+        /// every player will have up to seven cards drawn to them.
+        /// </summary>
+        public void DrawToSeven()
+        {
+            for (int i = 0; i < players.Count; i++)
+            {
+                for (int currentHandSize = players[i].GetHandSize(); currentHandSize < MAX_HAND_SIZE; currentHandSize++)
+                {
+                    players[i].hand.Add(deck.DrawCard());
+                }
+            }
+        }
 
 		public void ChangeTurn(string selectedCardID)
         {
@@ -123,14 +139,29 @@ namespace WaterFall_AppleToApple
             greenDeck = new Deck(shuffledCards.Take(GREEN_DECK_SIZE).ToList());
 		}
 
-        public void Shuffle()
-        {
 
-        }
-
-        public void ShowHand()
+        public List<Card> ShowHand(int playerNumber)
         {
             // Needs a way to hide player hands before implementation
+
+            if (currentPlayer == -1 && currentJudge != playerNumber)
+            {
+                currentPlayer = playerNumber;
+                return players[currentPlayer].hand;
+            }
+
+
+            return null;
+
+            // if cards are face down, Set all cards in <playerID>'s hand to be face up 
+            // else set all cards in <playerID>'s hand to be face down
+        }
+        public void HideHand()
+        {
+            // Needs a way to hide player hands before implementation
+
+            currentPlayer = -1;
+            //UI hides the shown cards
 
             // if cards are face down, Set all cards in <playerID>'s hand to be face up 
             // else set all cards in <playerID>'s hand to be face down
