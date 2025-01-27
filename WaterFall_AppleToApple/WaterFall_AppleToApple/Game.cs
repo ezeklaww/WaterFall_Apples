@@ -76,6 +76,7 @@ namespace WaterFall_AppleToApple
 				}
 			}
 			// Each card drawn is removed from the deck as soon as they are produced (for loop)
+
 			// Select a new player to be the Judge
 			// Draw lines from center of color wheel
 			// Start with drawing a line straight up
