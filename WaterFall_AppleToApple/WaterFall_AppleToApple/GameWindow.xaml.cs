@@ -30,6 +30,11 @@ namespace WaterFall_AppleToApple
             LoadPlayersToGrid();
         }
 
+        /// <summary>
+        /// This will load the players to the bottom-left of the GameWindow, 
+        /// assigning the player's name and the show hand btn to the correct grid placement
+        /// each button is assigned the OnShowHand onClick method.
+        /// </summary>
         public void LoadPlayersToGrid()
         {
             for (int i = 0; i < game.players.Count; i++)
@@ -98,7 +103,7 @@ namespace WaterFall_AppleToApple
                         Grid.SetRow(playerBtn, 3);
                         Grid.SetColumn(playerBtn, 3);
                         break;
-                }
+                }  
 
                 PlayerGrid.Children.Add(playerName);
                 PlayerGrid.Children.Add(playerBtn);
@@ -109,16 +114,18 @@ namespace WaterFall_AppleToApple
         }
 
 
-        // OnClick methods below, after clicking the specific button,
-        // it will take you to the game logic in the Game class
+        /// <summary>
+        /// a temp way to show that these buttons are individual.
+        /// </summary>
+        /// <param name="sender"></param> the object that sent the onClick to this method
         public void OnShowHand(object sender, RoutedEventArgs e)
         {
-            if (sender is Button clickedBtn) 
+            if (sender is Button clickedBtn)  // if all buttons are "OnShowHand" this will determine which specific btn was clicked
             {
                 if (clickedBtn.Content.Equals("Show Hand"))
                 {
                     clickedBtn.Content = "Hide Hand";
-                    //game.ShowHand();
+                    game.ShowHand();
                 } else if (clickedBtn.Content.Equals("Hide Hand"))
                 {
                     clickedBtn.Content = "Show Hand";
@@ -129,10 +136,7 @@ namespace WaterFall_AppleToApple
 
         public void OnCardInHand(object sender, RoutedEventArgs e)
         {
-            if (sender is Border thisCard)
-            {
-                Card1.Text = "clicked this card";
-            }
+        
         }
 
         public void onRotateClockwise()
