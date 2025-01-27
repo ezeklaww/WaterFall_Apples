@@ -19,5 +19,12 @@ namespace WaterFall_AppleToApple
         {
 
         }
+
+        public Card DrawCard()
+        {
+            Card card = cards[0];
+            cards.Remove(card);
+            return card;
+        }
     }
 }

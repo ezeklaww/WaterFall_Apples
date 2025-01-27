@@ -5,79 +5,87 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WaterFall_AppleToApple"
         mc:Ignorable="d"
-        Title="GameWindow" Height="450" Width="800">
+        Title="GameWindow" Height="675" Width="1200" ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!--PLayer 1-->
+        <!-- Player Names Box -->
+        <Grid Name="PlayerGrid" Margin="10,0,0,0" HorizontalAlignment="Left" Width="265" Height="120" VerticalAlignment="Bottom">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+        </Grid>
 
-        <TextBlock x:Name="player1Name" HorizontalAlignment="Left" Margin="308,299,0,0" TextWrapping="Wrap" Text="Player 1" VerticalAlignment="Top"/>
+        <Grid x:Name="GridHand" Grid.ColumnSpan="2" Margin="320,500,0,0" Height="149" VerticalAlignment="Top" HorizontalAlignment="Left" Width="750">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
 
-        <Button x:Name="player1Button" Content="Show hand" HorizontalAlignment="Left" Margin="368,294,0,0" VerticalAlignment="Top" Height="26" Width="63" Grid.ColumnSpan="2"/>
+        <Grid x:Name="Judge" Grid.ColumnSpan="2" Margin="0,0,74,0" Height="142" VerticalAlignment="Center" HorizontalAlignment="Right" Width="1076">
+            <Grid.ColumnDefinitions>
 
-        <!--Player 2-->
-        <TextBlock HorizontalAlignment="Left" Margin="23,335,0,0" TextWrapping="Wrap" Text="Player 2" VerticalAlignment="Top" RenderTransformOrigin="-0.325,0.566"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
 
-        <Button x:Name="player2Button" Content="Show Hand" HorizontalAlignment="Left" Margin="70,330,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.556,0.002" Width="63" Height="21"/>
-        <!--Player 3-->
-        <Border BorderBrush="Black" BorderThickness="2" Margin="356,330,356,0" Width="88" Height="104.04" Grid.ColumnSpan="2">
-            <TextBlock Text="Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+        <Border BorderBrush="Black" BorderThickness="2" Margin="323,448,167,0" Width="110" Height="130" VerticalAlignment="Top" MouseLeftButtonDown="OnCardInHand">
+            <TextBlock Name="Card1"  Text="Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
-        <Rectangle Fill="Transparent" Stroke="Black" StrokeThickness="1" Margin="343,330,44,0"/>
-        <Rectangle Fill="Transparent" Stroke="Black" StrokeThickness="1" Margin="328,330,44,0"/>
-        <Rectangle Fill="Transparent" Stroke="Black" StrokeThickness="1" Margin="313,330,44,0"/>
-        <Rectangle Fill="Transparent" Stroke="Black" StrokeThickness="1" Margin="298,330,44,0"/>
 
-        <Button x:Name="player3Button" Content="Show Hand" HorizontalAlignment="Left" Margin="70,366,0,0" VerticalAlignment="Top" Width="63" Height="21"/>
 
-        <TextBlock HorizontalAlignment="Left" Margin="23,369,0,0" TextWrapping="Wrap" Text="Player 3" VerticalAlignment="Top" RenderTransformOrigin="0.132,0.754"/>
 
-        <!--Player 4-->
-        <Button x:Name="player4Button" Content="Show hand" HorizontalAlignment="Left" Margin="70,398,0,0" VerticalAlignment="Top" Width="63" Height="21"/>
-
-        <TextBlock HorizontalAlignment="Left" Margin="23,403,0,0" TextWrapping="Wrap" Text="Player 4" VerticalAlignment="Top"/>
 
         <!--Shown Player Cards-->
-        <Border BorderBrush="Black" BorderThickness="2" Margin="89,165,223,165">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="89,165,223,165" Width="110" Height="130">
             <TextBlock Text="Player Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="356,165,356,165" Grid.ColumnSpan="2" Width="88">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="449,265,41,264" Width="110" Height="130">
             <TextBlock Text="Player Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="215,165,97,165" Width="88" Height="104.04">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="215,165,97,165" Width="110" Height="130">
             <TextBlock Text="Player Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="97,165,215,165" Width="88" Height="104.04" Grid.Column="1">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="97,165,215,165" Width="110" Height="130" Grid.Column="1">
             <TextBlock Text=" PlayerCard" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="223,165,89,165" Width="88" Height="104.04" Grid.Column="1">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="223,165,89,165" Width="110" Height="130" Grid.Column="1">
             <TextBlock Text="Player Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
         <!--Green deck-->
-        <Border BorderBrush="Black" BorderThickness="2" Margin="254,25,58,305" Width="88" Height="104.04">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="339,44,151,485" Width="110" Height="130">
             <TextBlock Text="Green Apples" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
         <!--Red Deck-->
-        <Border BorderBrush="Black" BorderThickness="2" Margin="281,312,31,18" Width="88" Height="104.04" Grid.Column="1">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="161,44,329,485" Width="110" Height="130" Grid.Column="1">
             <TextBlock Text="Red Apples" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
         <!--Prompt card-->
-        <Border BorderBrush="Black" BorderThickness="2" Margin="356,25,356,305" Width="88" Height="104.04" Grid.ColumnSpan="2">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="545,44,545,485" Width="110" Height="130" Grid.ColumnSpan="2">
             <TextBlock Text="Prompt" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
-        <Button Content="Show hand" HorizontalAlignment="Left" Margin="196,330,0,0" VerticalAlignment="Top" Width="63" Height="21"/>
-        <Button Content="Show Hand" HorizontalAlignment="Left" Margin="196,366,0,0" VerticalAlignment="Top" Width="63" Height="21"/>
-        <Button Content="Show Hand" HorizontalAlignment="Left" Margin="196,294,0,0" VerticalAlignment="Top" Width="63" Height="21"/>
-        <Button Content="Show Hand" HorizontalAlignment="Left" Margin="196,400,0,0" VerticalAlignment="Top" Width="63" Height="21"/>
-        <TextBlock HorizontalAlignment="Left" Margin="135,299,0,0" TextWrapping="Wrap" Text="Player 5" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="138,333,0,0" TextWrapping="Wrap" Text="Player 6" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="138,371,0,0" TextWrapping="Wrap" Text="Player 7" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="138,403,0,0" TextWrapping="Wrap" Text="PLayer 8" VerticalAlignment="Top"/>
+
+
     </Grid>
 </Window>

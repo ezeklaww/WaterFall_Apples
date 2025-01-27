@@ -10,6 +10,11 @@ namespace WaterFall_AppleToApple
     public class Game
     {
         const string ConnectionUri = "mongodb+srv://dev:dev@cluster0.arukagi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+        const int DECK_SIZE = 100;
+        const int GREEN_DECK_SIZE = 50;
+        const int SCORE_TO_WIN = 6;
+        const int MAX_HAND_SIZE = 7;
+
 
         public List<Player> players;
         public List<Card> shownCards;
@@ -19,7 +24,7 @@ namespace WaterFall_AppleToApple
         // Refers to element in players containing the Judge
         public int currentJudge;
 		// Keeps track of location in the players list
-		public int currentPlayer = 0;
+		public int currentPlayer = -1;
 
         public Game(int playerCount, List<string> playerNames)
         {
@@ -28,7 +33,7 @@ namespace WaterFall_AppleToApple
             {
                 players.Add(new Player((i+1), playerNames[i])); //player 1, 2...
             }
-
+            
             NewGame();
         }
 
@@ -36,14 +41,31 @@ namespace WaterFall_AppleToApple
 
         public void NewGame()
         {
-			// Any red and green cards removed from play are returned to their respective decks
-			// Set all player names to default and allow players to fill in their names. Each successful name adds to the player count and is stored in the list, up to a maximum of 10 players.
-			// Set everyone's point total to 0
-			// Each player draws 7 cards
+            MongoFillDecks();
+            DrawToSeven();
+            // Each player draws 7 cards
+            // Any red and green cards removed from play are returned to their respective decks
+            // Set all player names to default and allow players to fill in their names. Each successful name adds to the player count and is stored in the list, up to a maximum of 10 players.
+            // Set everyone's point total to 0
 			// Each card drawn is removed from the deck as soon as they are produced (for loop)
 			// A Judge is randomly selected from the list of players
 			// Shuffle the decks
+
 		}
+
+        /// <summary>
+        /// every player will have up to seven cards drawn to them.
+        /// </summary>
+        public void DrawToSeven()
+        {
+            for (int i = 0; i < players.Count; i++)
+            {
+                for (int currentHandSize = players[i].GetHandSize(); currentHandSize < MAX_HAND_SIZE; currentHandSize++)
+                {
+                    players[i].hand.Add(deck.DrawCard());
+                }
+            }
+        }
 
 		public void ChangeTurn(string selectedCardID)
         {
@@ -106,14 +128,41 @@ namespace WaterFall_AppleToApple
 
             var allCards = collection.Find(Builders<Card>.Filter.Empty).ToList();
 
+            List<Card> allGreenCards = allCards.Where(c => c.GreenApple).ToList();  //seperates green and red apple cards into their deck
+            List<Card> allRedCards = allCards.Where(c => !c.GreenApple).ToList();
 
-            greenDeck = new Deck(allCards.Where(c => c.GreenApple).ToList());  //seperates green and red apple cards into their deck
-            deck = new Deck(allCards.Where(c => !c.GreenApple).ToList());
+
+            var random = new Random();
+            var shuffledCards = allGreenCards.OrderBy(x => random.Next()).ToList();
+            deck = new Deck(shuffledCards.Take(DECK_SIZE).ToList());
+
+            shuffledCards = allRedCards.OrderBy(x => random.Next()).ToList();
+            greenDeck = new Deck(shuffledCards.Take(GREEN_DECK_SIZE).ToList());
 		}
 
-        public void ShowHand()
+
+        public List<Card> ShowHand(int playerNumber)
         {
             // Needs a way to hide player hands before implementation
+
+            if (currentPlayer == -1 && currentJudge != playerNumber)
+            {
+                currentPlayer = playerNumber;
+                return players[currentPlayer].hand;
+            }
+
+
+            return null;
+
+            // if cards are face down, Set all cards in <playerID>'s hand to be face up 
+            // else set all cards in <playerID>'s hand to be face down
+        }
+        public void HideHand()
+        {
+            // Needs a way to hide player hands before implementation
+
+            currentPlayer = -1;
+            //UI hides the shown cards
 
             // if cards are face down, Set all cards in <playerID>'s hand to be face up 
             // else set all cards in <playerID>'s hand to be face down
