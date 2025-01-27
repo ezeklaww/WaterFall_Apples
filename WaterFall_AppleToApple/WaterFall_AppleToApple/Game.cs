@@ -10,6 +10,10 @@ namespace WaterFall_AppleToApple
     public class Game
     {
         const string ConnectionUri = "mongodb+srv://dev:dev@cluster0.arukagi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+        const int DECK_SIZE = 100;
+        const int GREEN_DECK_SIZE = 50;
+        const int SCORE_TO_WIN = 6;
+
 
         public List<Player> players;
         public List<Card> shownCards;
@@ -28,7 +32,7 @@ namespace WaterFall_AppleToApple
             {
                 players.Add(new Player((i+1), playerNames[i])); //player 1, 2...
             }
-
+            
             NewGame();
         }
 
@@ -43,6 +47,8 @@ namespace WaterFall_AppleToApple
 			// Each card drawn is removed from the deck as soon as they are produced (for loop)
 			// A Judge is randomly selected from the list of players
 			// Shuffle the decks
+
+            MongoFillDecks();
 		}
 
 		public void ChangeTurn(string selectedCardID)
@@ -105,10 +111,22 @@ namespace WaterFall_AppleToApple
 
             var allCards = collection.Find(Builders<Card>.Filter.Empty).ToList();
 
+            List<Card> allGreenCards = allCards.Where(c => c.GreenApple).ToList();  //seperates green and red apple cards into their deck
+            List<Card> allRedCards = allCards.Where(c => !c.GreenApple).ToList();
 
-            greenDeck = new Deck(allCards.Where(c => c.GreenApple).ToList());  //seperates green and red apple cards into their deck
-            deck = new Deck(allCards.Where(c => !c.GreenApple).ToList());
+
+            var random = new Random();
+            var shuffledCards = allGreenCards.OrderBy(x => random.Next()).ToList();
+            deck = new Deck(shuffledCards.Take(DECK_SIZE).ToList());
+
+            shuffledCards = allRedCards.OrderBy(x => random.Next()).ToList();
+            greenDeck = new Deck(shuffledCards.Take(GREEN_DECK_SIZE).ToList());
 		}
+
+        public void Shuffle()
+        {
+
+        }
 
         public void ShowHand()
         {

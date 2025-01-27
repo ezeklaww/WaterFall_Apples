@@ -17,16 +17,18 @@ namespace WaterFall_AppleToApple
     /// </summary>
     public partial class StartupWindow : Window
     {
-		private Game game;
         private bool gameReady = false;
         private int playerCount = 0;
         List<string> names = new List<string>();
+
+        const int PLAYER_MIN = 1; //change back to 3 later
+        const int PLAYER_MAX = 8;
         public StartupWindow()
         {
             InitializeComponent();
         }
 
-        private void OnSubmit(object sender, RoutedEventArgs e)
+        private void OnClickSubmit(object sender, RoutedEventArgs e)
         {
             string inputText = tbInput.Text;
             if (string.IsNullOrWhiteSpace(inputText))
@@ -55,18 +57,7 @@ namespace WaterFall_AppleToApple
             {
                 Game game = new Game(playerCount, names); //player count, and player names
                 //switch windows
-                var gameWindow = new GameWindow();
-
-                //Zeke will take care of this when GameWindow stuff is pushed
-                //var gameWindow = new GameWindow(game);
-                //private Game game;
-                //public GameWindow(Game game)
-                //{
-                //    InitializeComponent();
-
-                //    this.game = game;
-                //}
-
+                var gameWindow = new GameWindow(game);
 
                 gameWindow.Show();
                 this.Close();
@@ -78,7 +69,7 @@ namespace WaterFall_AppleToApple
             int tempPlayerCount = 0;
             if (int.TryParse(inputText, out tempPlayerCount))
             {
-                if (tempPlayerCount < 3 || tempPlayerCount > 8)
+                if (tempPlayerCount < PLAYER_MIN || tempPlayerCount > PLAYER_MAX)
                 {
                     MessageBox.Show("Must be between 3 and 8");
                 }
@@ -97,33 +88,6 @@ namespace WaterFall_AppleToApple
             tbInput.Clear();
         }
 
-        // goes into the GameWindow
-        // OnClick methods below, after clicking the specific button,
-        // it will take you to the game logic in the Game class
-        public void onShowHand()
-        {
-			game.ShowHand();
-		}
 
-		public void onRotateClockwise()
-        {
-            game.RotateClockwise();
-		}
-
-		public void onRotateCounterClockwise()
-        {
-			game.RotateCounterClockwise();
-		}
-
-		public void onOK(Card card)
-        {
-			game.OK(card);
-		}
-
-		// Should we also pass in the player that is playing the card?
-		public void onSelectCard(Card card, Player player)
-        {
-			game.SelectCard(card, player);
-		}
 	}
 }

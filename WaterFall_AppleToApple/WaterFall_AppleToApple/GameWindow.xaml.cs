@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -19,9 +20,140 @@ namespace WaterFall_AppleToApple
     /// </summary>
     public partial class GameWindow : Window
     {
-        public GameWindow()
+        private Game game;
+        public GameWindow(Game game)
         {
             InitializeComponent();
+
+            this.game = game;
+
+            LoadPlayersToGrid();
+        }
+
+        public void LoadPlayersToGrid()
+        {
+            for (int i = 0; i < game.players.Count; i++)
+            {
+                var playerName = new TextBlock
+                {
+                    Name = $"player{i}Name",
+                    Text = game.players[i].Name,
+                    Margin = new Thickness(5, 0, 0, 5)
+                };
+                var playerBtn = new Button
+                {
+                    Name = $"player{i}Btn",
+                    Content = "Show Hand",
+                    Margin = new Thickness(0, 0, 0, 10)
+                };
+                playerBtn.Click += OnShowHand;
+
+                switch (i)
+                {
+                    case 0:
+                        Grid.SetRow(playerName, 0);
+                        Grid.SetColumn(playerName, 0);
+                        Grid.SetRow(playerBtn, 0);
+                        Grid.SetColumn(playerBtn, 1);
+                       break;
+                    case 1:
+                        Grid.SetRow(playerName, 1);
+                        Grid.SetColumn(playerName, 0);
+                        Grid.SetRow(playerBtn, 1);
+                        Grid.SetColumn(playerBtn, 1);
+                        break;
+                    case 2:
+                        Grid.SetRow(playerName, 2);
+                        Grid.SetColumn(playerName, 0);
+                        Grid.SetRow(playerBtn, 2);
+                        Grid.SetColumn(playerBtn, 1);
+                        break;
+                    case 3:
+                        Grid.SetRow(playerName, 3);
+                        Grid.SetColumn(playerName, 0);
+                        Grid.SetRow(playerBtn, 3);
+                        Grid.SetColumn(playerBtn, 1);
+                        break;
+                    case 4:
+                        Grid.SetRow(playerName, 0);
+                        Grid.SetColumn(playerName, 2);
+                        Grid.SetRow(playerBtn, 0);
+                        Grid.SetColumn(playerBtn, 3);
+                        break;
+                    case 5:
+                        Grid.SetRow(playerName, 1);
+                        Grid.SetColumn(playerName, 2);
+                        Grid.SetRow(playerBtn, 1);
+                        Grid.SetColumn(playerBtn, 3);
+                        break;
+                    case 6:
+                        Grid.SetRow(playerName, 2);
+                        Grid.SetColumn(playerName, 2);
+                        Grid.SetRow(playerBtn, 2);
+                        Grid.SetColumn(playerBtn, 3);
+                        break;
+                    case 7:
+                        Grid.SetRow(playerName, 3);
+                        Grid.SetColumn(playerName, 2);
+                        Grid.SetRow(playerBtn, 3);
+                        Grid.SetColumn(playerBtn, 3);
+                        break;
+                }
+
+                PlayerGrid.Children.Add(playerName);
+                PlayerGrid.Children.Add(playerBtn);
+            }
+
+
+
+        }
+
+
+        // OnClick methods below, after clicking the specific button,
+        // it will take you to the game logic in the Game class
+        public void OnShowHand(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button clickedBtn) 
+            {
+                if (clickedBtn.Content.Equals("Show Hand"))
+                {
+                    clickedBtn.Content = "Hide Hand";
+                    //game.ShowHand();
+                } else if (clickedBtn.Content.Equals("Hide Hand"))
+                {
+                    clickedBtn.Content = "Show Hand";
+                }
+            
+            }
+        }
+
+        public void OnCardInHand(object sender, RoutedEventArgs e)
+        {
+            if (sender is Border thisCard)
+            {
+                Card1.Text = "clicked this card";
+            }
+        }
+
+        public void onRotateClockwise()
+        {
+            game.RotateClockwise();
+        }
+
+        public void onRotateCounterClockwise()
+        {
+            game.RotateCounterClockwise();
+        }
+
+        public void onOK(Card card)
+        {
+            game.OK(card);
+        }
+
+        // Should we also pass in the player that is playing the card?
+        public void onSelectCard(Card card, Player player)
+        {
+            game.SelectCard(card, player);
         }
     }
 }

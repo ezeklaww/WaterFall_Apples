@@ -10,7 +10,7 @@
         <Label Name="lblTtle" Content="Apples 2 Apples" FontSize="32" Margin="282,84,282,0" VerticalAlignment="Top"/>
         <Label Name="lblOutput" Content="How many players do you want?" HorizontalAlignment="Center" Margin="0,142,0,0" VerticalAlignment="Top"/>
         <TextBox Name="tbInput" Width="76" Height="20" HorizontalAlignment="Left" Margin="324,197,0,0" VerticalAlignment="Top"/>
-        <Button Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="421,197,0,0" VerticalAlignment="Top" Click="OnSubmit"/>
+        <Button Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="421,197,0,0" VerticalAlignment="Top" Click="OnClickSubmit"/>
 
 
     </Grid>
