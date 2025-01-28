@@ -28,29 +28,33 @@ namespace WaterFall_AppleToApple
 
         public Game(int playerCount, List<string> playerNames)
         {
-            players = new List<Player>();
-            for (int i = 0; i < playerCount; i++) 
-            {
-                players.Add(new Player((i+1), playerNames[i])); //player 1, 2...
-            }
-            
-            NewGame();
+            NewGame(playerCount, playerNames);
         }
 
         //public void CreatePlayers(int playerCount, List<string> playerNames)
 
-        public void NewGame()
+        public void NewGame(int playerCount, List<string> playerNames)
         {
-            MongoFillDecks();
-            DrawToSeven();
-            // Each player draws 7 cards
             // Any red and green cards removed from play are returned to their respective decks
+            MongoFillDecks();
             // Set all player names to default and allow players to fill in their names. Each successful name adds to the player count and is stored in the list, up to a maximum of 10 players.
-            // Set everyone's point total to 0
-			// Each card drawn is removed from the deck as soon as they are produced (for loop)
-			// A Judge is randomly selected from the list of players
-			// Shuffle the decks
+            CreatePlayers(playerCount, playerNames);
+            // Each player draws 7 cards
+            DrawToSeven();
+            // A Judge is randomly selected from the list of players
+            var rand = System.DateTime.Now.Second;
+            int thisOne = rand % players.Count;
+            currentJudge = thisOne;
+		}
 
+        public void CreatePlayers(int playerCount, List<string> playerNames)
+        {
+            players = new List<Player>();
+
+			for (int i = 0; i < playerCount; i++)
+			{
+				players.Add(new Player((i + 1), playerNames[i])); //player 1, 2...
+			}
 		}
 
         /// <summary>
@@ -98,6 +102,7 @@ namespace WaterFall_AppleToApple
 				}
 			}
 			// Each card drawn is removed from the deck as soon as they are produced (for loop)
+
 			// Select a new player to be the Judge
 			// Draw lines from center of color wheel
 			// Start with drawing a line straight up
