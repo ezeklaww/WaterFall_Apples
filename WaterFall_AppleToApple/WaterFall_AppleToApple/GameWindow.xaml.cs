@@ -12,6 +12,7 @@ namespace WaterFall_AppleToApple
     public partial class GameWindow : Window
     {
         private Game game;
+        int playedCardCount = 0;
         public GameWindow(Game game)
         {
             InitializeComponent();
@@ -312,13 +313,23 @@ namespace WaterFall_AppleToApple
                 if (game.players[game.currentPlayer].CardSelected == "-1") { 
                 game.players[game.currentPlayer].CardSelected = card.Id;
 
-                    //if (game.players[game.currentPlayer].cardSelected)
-                    TextBlock btnTitle = (TextBlock)FindName($"CenterTitleCard{num}");
-                    TextBlock btnDescription = (TextBlock)FindName($"CenterDescriptionCard{num}");
-                    Button centerBtn = (Button)FindName($"CenterCard{num}");
-                    centerBtn.Visibility = (Visibility.Visible);
-                    btnTitle.Text = card.Title;
-                    btnDescription.Text = card.Description;
+
+                    // num is for the index of the card you chose not the
+                    
+                        TextBlock btnTitle = (TextBlock)FindName($"CenterTitleCard{playedCardCount}");
+                        TextBlock btnDescription = (TextBlock)FindName($"CenterDescriptionCard{playedCardCount}");
+                        Button centerBtn = (Button)FindName($"CenterCard{playedCardCount}");
+                        centerBtn.Visibility = (Visibility.Visible);
+                        btnTitle.Text = card.Title;
+                        btnDescription.Text = card.Description;
+                    
+                    playedCardCount++;
+
+                    //if (playedCardCount >= game.players.Count)
+                    //{
+                    //    for (int i = 0; i < game.players.Count - 1; i++) ;
+                    //}
+
                 } else
                 {
                     MessageBox.Show("You can only play one card");
@@ -328,6 +339,8 @@ namespace WaterFall_AppleToApple
                 //ShowPlacedCards();
             }
         }
+
+
 
         public void OnJudgeCard(object sender, RoutedEventArgs e)
         {
