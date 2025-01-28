@@ -28,6 +28,8 @@ namespace WaterFall_AppleToApple
             this.game = game;
 
             LoadPlayersToGrid();
+            
+            UpdateJudge();
         }
 
         /// <summary>
@@ -109,6 +111,7 @@ namespace WaterFall_AppleToApple
 
                 PlayerGrid.Children.Add(playerName);
                 PlayerGrid.Children.Add(playerBtn);
+                RegisterName(playerBtn.Name, playerBtn);
             }
 
 
@@ -124,21 +127,48 @@ namespace WaterFall_AppleToApple
         {
             if (sender is Button clickedBtn)  // if all buttons are "OnShowHand" this will determine which specific btn was clicked
             {
+
                 if (clickedBtn.Content.Equals("Show Hand"))
                 {
-                    clickedBtn.Content = "Hide Hand";
-                    
                     string btnName = clickedBtn.Name;
-                    game.ShowHand(int.Parse(btnName.Substring(9)));
+                    int currentPlayerNum = int.Parse(btnName.Substring(9));
+                    List<Card> hand = game.ShowHand(currentPlayerNum);
+
+                    if (hand != null)
+                    {
+                        clickedBtn.Content = "Hide Hand";
+                        GridHand.Visibility = Visibility.Visible;
+                        GridHandFaceDown.Visibility = Visibility.Hidden;
+                        DisplayHand(hand);
+
+                        for (int i = 0; i < game.players.Count; i++)
+                        {
+                            if (i == currentPlayerNum) continue;
+                            Button tempBtn = (Button)FindName($"btnPlayer{i}");
+                            if (tempBtn != null) tempBtn.IsEnabled = false;
+                        }
+                    } else
+                    {
+                        MessageBox.Show("The judge can't play any cards this turn");
+                    }
                 } else if (clickedBtn.Content.Equals("Hide Hand"))
                 {
                     clickedBtn.Content = "Show Hand";
 
-
+                    GridHand.Visibility = Visibility.Hidden;
+                    GridHandFaceDown.Visibility = Visibility.Visible;
                     game.HideHand();
-                    StopDisplayingHand();
+
+                    for (int i = 0; i < game.players.Count; i++)
+                    {
+                        Button playerBtn = (Button)FindName($"btnPlayer{i}");
+                        playerBtn.IsEnabled = true;
+                    }
                 }
-            
+
+
+
+
             }
         }
 
@@ -146,33 +176,26 @@ namespace WaterFall_AppleToApple
         {
             for (int i = 0; i < hand.Count(); i++)
             {
-                var cardTitle = new TextBlock
-                {
-                    Name = $"card{i}Title",
-                    Text = hand[i].Title,
-                    Margin = new Thickness(5, 0, 0, 5)                    
-                };
-                var cardDescription = new TextBlock
-                {
-                    Name = $"card{i}Desciption",
-                    Text = hand[i].Description,
-                    Margin = new Thickness(5, 0, 0, 5)
-                };
 
-                GridHand.Children.Add(cardTitle);
-                GridHand.Children.Add(cardDescription);
+                TextBlock btnTitle = (TextBlock)FindName($"TitleCard{i}");
+                TextBlock btnDescription = (TextBlock)FindName($"DescriptionCard{i}");
+
+                btnTitle.Text = hand[i].Title;
+                btnDescription.Text = hand[i].Description;
             }
 
         }
 
-        public void StopDisplayingHand()
-        {
-            GridHand.Children.Clear();
-        }
-
         public void OnCardInHand(object sender, RoutedEventArgs e)
         {
-        
+            if (sender is Button clickedBtn)
+            {
+
+                //Card0    4
+                //TitleCard0    9
+                //DescriptionCard0  15
+                MessageBox.Show(clickedBtn.Name);
+            }
         }
 
         public void onRotateClockwise()
@@ -195,5 +218,23 @@ namespace WaterFall_AppleToApple
         {
             game.SelectCard(card, player);
         }
+
+
+        public void UpdateJudge()
+        {
+            txtJudge.Text = $"Current Judge: {game.players[game.currentJudge].Name} ({(game.currentJudge + 1)})";
+        }
+
+
+        //the red and green deck have click functionality if you want
+        public void ClickGreenDeck(object sender, MouseButtonEventArgs e) 
+        {
+
+        }
+        public void ClickRedDeck(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        
     }
 }

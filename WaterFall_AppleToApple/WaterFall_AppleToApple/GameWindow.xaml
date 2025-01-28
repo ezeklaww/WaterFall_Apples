@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WaterFall_AppleToApple"
         mc:Ignorable="d"
-        Title="GameWindow" Height="675" Width="1200">
+        Title="GameWindow" Height="900" Width="1600" ResizeMode="NoResize">
     <Window.Background>
         <ImageBrush ImageSource="Resources/gameBkg.jpg" />
     </Window.Background>
@@ -31,7 +31,8 @@
             </Grid.ColumnDefinitions>
         </Grid>
 
-        <Grid x:Name="GridHand" Grid.ColumnSpan="2" Margin="320,500,0,0" Height="149" VerticalAlignment="Top" HorizontalAlignment="Left" Width="750">
+        <!-- face down hand -->
+        <Grid x:Name="GridHandFaceDown" Grid.ColumnSpan="2" Margin="300,0,0,15" Width="1204" Height="260" VerticalAlignment="Bottom" HorizontalAlignment="Left" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -41,49 +42,132 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+
+            <Image Source="Resources/redAppleBack.png" Width="162" Grid.Column="0" Height="250"/>
+            <Image Source="Resources/redAppleBack.png" Width="162" Grid.Column="1" Height="250"/>
+            <Image Source="Resources/redAppleBack.png" Width="162" Grid.Column="2" Height="250"/>
+            <Image Source="Resources/redAppleBack.png" Width="162" Grid.Column="3" Height="250"/>
+            <Image Source="Resources/redAppleBack.png" Width="162" Grid.Column="4" Height="250"/>
+            <Image Source="Resources/redAppleBack.png" Width="162" Grid.Column="5" Height="250"/>
+            <Image Source="Resources/redAppleBack.png" Width="162" Grid.Column="6" Height="250"/>
+
         </Grid>
 
-        <Grid x:Name="Judge" Grid.ColumnSpan="2" Margin="0,0,74,0" Height="142" VerticalAlignment="Center" HorizontalAlignment="Right" Width="1076">
+        <!-- Face up hand, working as buttons -->
+        <Grid x:Name="GridHand" Grid.ColumnSpan="2" Margin="300,0,0,15" Width="1204" Height="260" VerticalAlignment="Bottom" HorizontalAlignment="Left" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+
+
+            <Button x:Name="Card0" Background="Transparent" Grid.Column="0" BorderThickness="0" Margin="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="OnCardInHand">
+                <Border Background="White" BorderBrush="White" BorderThickness="2" CornerRadius="5" HorizontalAlignment="Center" Width="162" Height="250" VerticalAlignment="Bottom">
+                    <StackPanel>
+                        <Border BorderBrush="Red" BorderThickness="0,0,0,2" Margin="5">
+                            <TextBlock Name="TitleCard0" Text="Card 1" FontWeight="Bold" FontSize="16" Padding="0,0,0,5" TextWrapping="Wrap"/>
+                        </Border>
+                        <TextBlock Name="DescriptionCard0" Text="This is the description for Card 1." FontSize="14" Margin="5" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+
+            <Button x:Name="Card1" Background="Transparent" Grid.Column="1" BorderThickness="0" Margin="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="OnCardInHand">
+                <Border Background="White" BorderBrush="White" BorderThickness="2" CornerRadius="5" HorizontalAlignment="Center" Width="162" Height="250" VerticalAlignment="Bottom">
+                    <StackPanel>
+                        <Border BorderBrush="Red" BorderThickness="0,0,0,2" Margin="5">
+                            <TextBlock Name="TitleCard1" Text="Card 1" FontWeight="Bold" FontSize="16" Padding="0,0,0,5" TextWrapping="Wrap"/>
+                        </Border>
+                        <TextBlock Name="DescriptionCard1"  Text="This is the description for Card 1." FontSize="14" Margin="5" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+
+            <Button x:Name="Card2" Background="Transparent" Grid.Column="2" BorderThickness="0" Margin="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="OnCardInHand">
+                <Border Background="White" BorderBrush="White" BorderThickness="2" CornerRadius="5" HorizontalAlignment="Center" Width="162" Height="250" VerticalAlignment="Bottom">
+                    <StackPanel>
+                        <Border BorderBrush="Red" BorderThickness="0,0,0,2" Margin="5">
+                            <TextBlock Name="TitleCard2" Text="Card 1" FontWeight="Bold" FontSize="16" Padding="0,0,0,5" TextWrapping="Wrap"/>
+                        </Border>
+                        <TextBlock Name="DescriptionCard2"  Text="This is the description for Card 1." FontSize="14" Margin="5" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+
+            <Button x:Name="Card3" Background="Transparent" Grid.Column="3" BorderThickness="0" Margin="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="OnCardInHand">
+                <Border Background="White" BorderBrush="White" BorderThickness="2" CornerRadius="5" HorizontalAlignment="Center" Width="162" Height="250" VerticalAlignment="Bottom">
+                    <StackPanel>
+                        <Border BorderBrush="Red" BorderThickness="0,0,0,2" Margin="5">
+                            <TextBlock Name="TitleCard3" Text="Card 1" FontWeight="Bold" FontSize="16" Padding="0,0,0,5" TextWrapping="Wrap"/>
+                        </Border>
+                        <TextBlock Name="DescriptionCard3"  Text="This is the description for Card 1." FontSize="14" Margin="5" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+
+            <Button x:Name="Card4" Background="Transparent" Grid.Column="4" BorderThickness="0" Margin="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="OnCardInHand">
+                <Border Background="White" BorderBrush="White" BorderThickness="2" CornerRadius="5" HorizontalAlignment="Center" Width="162" Height="250" VerticalAlignment="Bottom">
+                    <StackPanel>
+                        <Border BorderBrush="Red" BorderThickness="0,0,0,2" Margin="5">
+                            <TextBlock Name="TitleCard4" Text="Card 1" FontWeight="Bold" FontSize="16" Padding="0,0,0,5" TextWrapping="Wrap"/>
+                        </Border>
+                        <TextBlock Name="DescriptionCard4"  Text="This is the description for Card 1." FontSize="14" Margin="5" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+
+            <Button x:Name="Card5" Background="Transparent" Grid.Column="5" BorderThickness="0" Margin="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="OnCardInHand">
+                <Border Background="White" BorderBrush="White" BorderThickness="2" CornerRadius="5" HorizontalAlignment="Center" Width="162" Height="250" VerticalAlignment="Bottom">
+                    <StackPanel>
+                        <Border BorderBrush="Red" BorderThickness="0,0,0,2" Margin="5">
+                            <TextBlock Name="TitleCard5" Text="Card 1" FontWeight="Bold" FontSize="16" Padding="0,0,0,5" TextWrapping="Wrap"/>
+                        </Border>
+                        <TextBlock Name="DescriptionCard5"  Text="This is the description for Card 1." FontSize="14" Margin="5" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+
+            <Button x:Name="Card6" Background="Transparent" Grid.Column="6" BorderThickness="0" Margin="0,0,0,5" HorizontalAlignment="Center" VerticalAlignment="Bottom" Click="OnCardInHand">
+                <Border Background="White" BorderBrush="White" BorderThickness="2" CornerRadius="5" HorizontalAlignment="Center" Width="162" Height="250" VerticalAlignment="Bottom">
+                    <StackPanel>
+                        <Border BorderBrush="Red" BorderThickness="0,0,0,2" Margin="5">
+                            <TextBlock Name="TitleCard6" Text="Card 1" FontWeight="Bold" FontSize="16" Padding="0,0,0,5" TextWrapping="Wrap"/>
+                        </Border>
+                        <TextBlock Name="DescriptionCard6"  Text="This is the description for Card 1." FontSize="14" Margin="5" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </Button>
+
+        </Grid>
+
+
+
+
+        <Grid x:Name="Judge" Grid.ColumnSpan="2" Margin="198,0,198,297" VerticalAlignment="Bottom" Height="260">
             <Grid.ColumnDefinitions>
 
             </Grid.ColumnDefinitions>
         </Grid>
-
-
-        <Border BorderBrush="Black" BorderThickness="2" Margin="323,448,167,0" VerticalAlignment="Top" MouseLeftButtonDown="OnCardInHand" Height="130">
-            <TextBlock Name="Card1"  Text="Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
 
 
 
 
         <!--Shown Player Cards-->
-        <Border BorderBrush="Black" BorderThickness="2" Margin="126,265,364,264">
-            <TextBlock Text="Player Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="394,264,0,264" HorizontalAlignment="Left" Width="110">
-            <TextBlock Text="Player Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="268,265,222,264">
-            <TextBlock Text="Player Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="97,165,215,165" Width="110" Height="130" Grid.Column="1">
-            <TextBlock Text="PlayerCard" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="223,165,89,165" Width="110" Height="130" Grid.Column="1">
-            <TextBlock Text="Player Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
 
         <!--Green deck-->
-        <Image Source="Resources/greenAppleBack.png" Margin="344,0,0,465" Width="100" Height="150" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+        <Image Source="Resources/greenAppleBack.png" Margin="400,0,0,590" Width="162" Height="250" VerticalAlignment="Bottom" HorizontalAlignment="Left" MouseLeftButtonDown="ClickGreenDeck"/>
 
         <!--Red Deck-->
-        <Image Source="Resources/redAppleBack.png" Margin="0,0,334,465" Width="100" Grid.Column="1" Height="150" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+        <Image Source="Resources/redAppleBack.png" Margin="0,0,400,590" Width="162" Grid.Column="1" Height="250" VerticalAlignment="Bottom" HorizontalAlignment="Right" MouseLeftButtonDown="ClickRedDeck"/>
 
-        <!--Prompt card-->
-        <Border BorderBrush="Black" BorderThickness="2" Margin="550,0,550,465" Width="100" Height="150" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
-            <TextBlock Text="Prompt" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
+        <TextBlock Name="txtJudge"  HorizontalAlignment="Right" Margin="0,0,693,797" TextWrapping="Wrap" Text="Current Judge" Foreground="#FFD700" FontWeight="DemiBold" FontSize="32" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+
 
 
     </Grid>
