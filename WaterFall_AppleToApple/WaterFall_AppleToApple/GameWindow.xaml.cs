@@ -306,15 +306,23 @@ namespace WaterFall_AppleToApple
 
                 int num = int.Parse(clickedBtn.Name.Substring(4));
 
-                Card card = game.players[game.currentPlayer].hand[num];
 
-                //if (game.players[game.currentPlayer].cardSelected)
-                TextBlock btnTitle = (TextBlock)FindName($"CenterTitleCard{num}");
-                TextBlock btnDescription = (TextBlock)FindName($"CenterDescriptionCard{num}");
-                Button centerBtn = (Button)FindName($"CenterCard{num}");
-                centerBtn.Visibility = (Visibility.Visible);
-                btnTitle.Text = card.Title;
-                btnDescription.Text = card.Description;
+                Card card = game.players[game.currentPlayer].hand[num];
+                
+                if (game.players[game.currentPlayer].CardSelected == "-1") { 
+                game.players[game.currentPlayer].CardSelected = card.Id;
+
+                    //if (game.players[game.currentPlayer].cardSelected)
+                    TextBlock btnTitle = (TextBlock)FindName($"CenterTitleCard{num}");
+                    TextBlock btnDescription = (TextBlock)FindName($"CenterDescriptionCard{num}");
+                    Button centerBtn = (Button)FindName($"CenterCard{num}");
+                    centerBtn.Visibility = (Visibility.Visible);
+                    btnTitle.Text = card.Title;
+                    btnDescription.Text = card.Description;
+                } else
+                {
+                    MessageBox.Show("You can only play one card");
+                }
 
 
                 //ShowPlacedCards();
