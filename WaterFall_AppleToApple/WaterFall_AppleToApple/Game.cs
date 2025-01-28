@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using MongoDB.Driver;
 
 namespace WaterFall_AppleToApple
@@ -126,6 +127,8 @@ namespace WaterFall_AppleToApple
         // then putting the green and red cards into the apporpiate deck
 		public void MongoFillDecks()
         {
+            try 
+            { 
             var client = new MongoClient(ConnectionUri);
             var database = client.GetDatabase("csc130");
             var collection = database.GetCollection<Card>("AppleToApple");
@@ -142,7 +145,12 @@ namespace WaterFall_AppleToApple
 
             shuffledCards = allRedCards.OrderBy(x => random.Next()).ToList();
             greenDeck = new Deck(shuffledCards.Take(GREEN_DECK_SIZE).ToList());
-		}
+            } catch (Exception e)
+            {
+                MessageBox.Show("MongoDB is not working properly, Try again later");
+            }
+
+        }
 
 
         public List<Card> ShowHand(int playerNumber)

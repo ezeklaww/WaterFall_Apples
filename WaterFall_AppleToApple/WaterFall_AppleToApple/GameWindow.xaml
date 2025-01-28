@@ -149,13 +149,13 @@
 
 
 
-        <Grid x:Name="Judge" Grid.ColumnSpan="2" Margin="198,0,198,297" VerticalAlignment="Bottom" Height="260">
-            <Grid.ColumnDefinitions>
+        <Grid x:Name="JudgeGrid" Grid.ColumnSpan="2" Margin="198,0,198,297" VerticalAlignment="Bottom" Width="1204" Height="260">
 
-            </Grid.ColumnDefinitions>
         </Grid>
 
+        <Grid x:Name="JudgeGridFaceDown" Grid.ColumnSpan="2" Margin="198,0,198,297" VerticalAlignment="Bottom" Width="1204" Height="260" Visibility="Hidden">
 
+        </Grid>
 
 
         <!--Shown Player Cards-->
