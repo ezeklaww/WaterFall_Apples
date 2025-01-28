@@ -43,13 +43,15 @@ namespace WaterFall_AppleToApple
                 {
                     Name = $"player{i}Name",
                     Text = game.players[i].Name,
-                    Margin = new Thickness(5, 0, 0, 5)
+                    Margin = new Thickness(5, 0, 0, 5),
+                    Foreground = new SolidColorBrush(Color.FromRgb(255, 215, 0))
                 };
                 var playerBtn = new Button
                 {
                     Name = $"btnPlayer{i}",
                     Content = "Show Hand",
-                    Margin = new Thickness(0, 0, 0, 10)
+                    Margin = new Thickness(0, 0, 0, 10),
+                    Background = new SolidColorBrush(Color.FromRgb(245, 245, 220))
                 };
                 playerBtn.Click += OnShowHand;
 
@@ -148,7 +150,7 @@ namespace WaterFall_AppleToApple
                 {
                     Name = $"card{i}Title",
                     Text = hand[i].Title,
-                    Margin = new Thickness(5, 0, 0, 5)
+                    Margin = new Thickness(5, 0, 0, 5)                    
                 };
                 var cardDescription = new TextBlock
                 {

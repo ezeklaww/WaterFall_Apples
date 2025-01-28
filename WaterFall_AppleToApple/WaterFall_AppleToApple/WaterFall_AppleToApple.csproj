@@ -9,8 +9,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\gameBkg.jpg" />
+    <None Remove="Resources\greenAppleBack.png" />
+    <None Remove="Resources\redAppleBack.png" />
+    <None Remove="Resources\startupBkg.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MongoDB.Bson" Version="3.1.0" />
     <PackageReference Include="MongoDB.Driver" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\gameBkg.jpg" />
+    <Resource Include="Resources\greenAppleBack.png" />
+    <Resource Include="Resources\redAppleBack.png" />
+    <Resource Include="Resources\startupBkg.jpg" />
   </ItemGroup>
 
 </Project>

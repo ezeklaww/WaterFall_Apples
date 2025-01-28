@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WaterFall_AppleToApple"
         mc:Ignorable="d"
-        Title="GameWindow" Height="675" Width="1200" ResizeMode="NoResize">
+        Title="GameWindow" Height="675" Width="1200">
+    <Window.Background>
+        <ImageBrush ImageSource="Resources/gameBkg.jpg" />
+    </Window.Background>
     <Grid Margin="0" ClipToBounds="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -65,24 +68,20 @@
             <TextBlock Text="Player Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
         <Border BorderBrush="Black" BorderThickness="2" Margin="97,165,215,165" Width="110" Height="130" Grid.Column="1">
-            <TextBlock Text=" PlayerCard" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock Text="PlayerCard" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
         <Border BorderBrush="Black" BorderThickness="2" Margin="223,165,89,165" Width="110" Height="130" Grid.Column="1">
             <TextBlock Text="Player Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
         <!--Green deck-->
-        <Border BorderBrush="Black" BorderThickness="2" Margin="339,44,151,485">
-            <TextBlock Text="Green Apples" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
+        <Image Source="Resources/greenAppleBack.png" Margin="344,0,0,465" Width="100" Height="150" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
 
         <!--Red Deck-->
-        <Border BorderBrush="Black" BorderThickness="2" Margin="161,44,329,485" Grid.Column="1">
-            <TextBlock Text="Red Apples" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </Border>
+        <Image Source="Resources/redAppleBack.png" Margin="0,0,334,465" Width="100" Grid.Column="1" Height="150" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
 
         <!--Prompt card-->
-        <Border BorderBrush="Black" BorderThickness="2" Margin="545,44,545,485" Grid.ColumnSpan="2">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="550,0,550,465" Width="100" Height="150" Grid.ColumnSpan="2" VerticalAlignment="Bottom">
             <TextBlock Text="Prompt" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
