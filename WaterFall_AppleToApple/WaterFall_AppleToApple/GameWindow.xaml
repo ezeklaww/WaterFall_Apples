@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WaterFall_AppleToApple"
         mc:Ignorable="d"
         Title="GameWindow" Height="675" Width="1200" ResizeMode="NoResize">
-    <Grid>
+    <Grid Margin="0" ClipToBounds="True">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -47,7 +47,7 @@
         </Grid>
 
 
-        <Border BorderBrush="Black" BorderThickness="2" Margin="323,448,167,0" Width="110" Height="130" VerticalAlignment="Top" MouseLeftButtonDown="OnCardInHand">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="323,448,167,0" VerticalAlignment="Top" MouseLeftButtonDown="OnCardInHand" Height="130">
             <TextBlock Name="Card1"  Text="Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
@@ -55,13 +55,13 @@
 
 
         <!--Shown Player Cards-->
-        <Border BorderBrush="Black" BorderThickness="2" Margin="89,165,223,165" Width="110" Height="130">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="126,265,364,264">
             <TextBlock Text="Player Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="449,265,41,264" Width="110" Height="130">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="394,264,0,264" HorizontalAlignment="Left" Width="110">
             <TextBlock Text="Player Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
-        <Border BorderBrush="Black" BorderThickness="2" Margin="215,165,97,165" Width="110" Height="130">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="268,265,222,264">
             <TextBlock Text="Player Card" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
         <Border BorderBrush="Black" BorderThickness="2" Margin="97,165,215,165" Width="110" Height="130" Grid.Column="1">
@@ -72,17 +72,17 @@
         </Border>
 
         <!--Green deck-->
-        <Border BorderBrush="Black" BorderThickness="2" Margin="339,44,151,485" Width="110" Height="130">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="339,44,151,485">
             <TextBlock Text="Green Apples" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
         <!--Red Deck-->
-        <Border BorderBrush="Black" BorderThickness="2" Margin="161,44,329,485" Width="110" Height="130" Grid.Column="1">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="161,44,329,485" Grid.Column="1">
             <TextBlock Text="Red Apples" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 
         <!--Prompt card-->
-        <Border BorderBrush="Black" BorderThickness="2" Margin="545,44,545,485" Width="110" Height="130" Grid.ColumnSpan="2">
+        <Border BorderBrush="Black" BorderThickness="2" Margin="545,44,545,485" Grid.ColumnSpan="2">
             <TextBlock Text="Prompt" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
 

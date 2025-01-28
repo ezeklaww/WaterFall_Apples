@@ -10,7 +10,7 @@ namespace WaterFall_AppleToApple
     public class Game
     {
         const string ConnectionUri = "mongodb+srv://dev:dev@cluster0.arukagi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-        const int DECK_SIZE = 100;
+        const int DECK_SIZE = 300;
         const int GREEN_DECK_SIZE = 50;
         const int SCORE_TO_WIN = 6;
         const int MAX_HAND_SIZE = 7;
