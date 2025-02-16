@@ -21,7 +21,7 @@ namespace WaterFall_AppleToApple
         private int playerCount = 0;
         List<string> names = new List<string>();
 
-        const int PLAYER_MIN = 1; //change back to 3 later
+        const int PLAYER_MIN = 3;
         const int PLAYER_MAX = 8;
         public StartupWindow()
         {
